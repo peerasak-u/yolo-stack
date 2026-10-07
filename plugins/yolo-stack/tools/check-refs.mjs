@@ -127,6 +127,13 @@ for (const { role, skill } of models.roles) {
   else if (!readFileSync(file, "utf8").includes(role)) fail(file, `models.json role "${role}" is not named in this skill`);
 }
 
+// The setup skill writes the override sheet, so its sheet shape lists every role.
+const setupFile = join(skillsDir, `setup-${modeDir.replace(/-mode$/, "-stack")}`, "SKILL.md");
+const sheet = readFileSync(setupFile, "utf8");
+for (const { role } of models.roles) {
+  if (!new RegExp(`^${role}: `, "m").test(sheet)) fail(setupFile, `models.json role "${role}" has no line in the sheet shape`);
+}
+
 if (errors.length) {
   console.error(errors.join("\n"));
   console.error(`\n${errors.length} problem(s)`);

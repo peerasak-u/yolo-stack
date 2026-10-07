@@ -16,6 +16,7 @@ if (!existsSync(modeDir)) {
   process.exit(1);
 }
 renameSync(modeDir, join(root, "skills", `${to}-mode`));
+renameSync(join(root, "skills", `setup-${from}-stack`), join(root, "skills", `setup-${to}-stack`));
 
 const walk = (dir) =>
   readdirSync(dir).flatMap((name) => {

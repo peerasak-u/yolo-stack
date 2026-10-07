@@ -29,6 +29,7 @@ Wired. These fire on their own.
 - Long, multi-step, or unattended work, or work a human reviews after stepping away → a decision trail via the **show-me-your-work** skill.
 - Any prose a human will read, including your reply → the **unslop** skill.
 - The human asks how to start, or asks to be set up → the **get-started** skill.
+- The human asks to change which models the stack uses, or to turn the session hook on or off → the **setup-yolo-stack** skill.
 - A person wants to teach how they do a recurring job, or a job that will recur has no playbook → the **capture-playbook** skill.
 - A large or unfamiliar multi-step task matches no playbook, shipped or personal → the **figure-it-out** skill.
 - Writing or editing a SKILL.md, a principle, or a playbook → the **Authoring or modifying a skill** playbook.
@@ -75,7 +76,7 @@ You own every subagent's work. Read what it produced and write your own summary.
 
 Give each subagent file pointers, not pasted context. Give each writer its own output location. A second opinion is the same prompt on a different model.
 
-Skills that fan out (`reflect`, `why`, `interrogate`, `swarm`, `arena`) set their own models from their Models section and the `stack-models.md` override sheet. Follow what the skill prescribes.
+Skills that fan out (`reflect`, `why`, `interrogate`, `swarm`, `arena`) set their own models from their Models section and the `stack-models.md` override sheet, which the **setup-yolo-stack** skill writes. Follow what the skill prescribes.
 
 ## Writing the reply
 

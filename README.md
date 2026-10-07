@@ -28,6 +28,8 @@ codex plugin add yolo-stack@yolo-stack
 
 Codex จะขอให้กดไว้ใจ hook ผ่าน `/hooks` ก่อนที่ hook จะทำงาน
 
+ค่าเริ่มต้นใช้ได้เลยโดยไม่ต้องตั้งอะไร ถ้าอยากเปลี่ยนโมเดลที่แต่ละบทบาทใช้ หรือปิด hook ตอนเริ่ม session ให้สั่ง `setup-yolo-stack`
+
 ## เริ่มใช้
 
 1. สั่ง `get-started` แล้วตอบคำถามสี่ข้อ AI จะจดว่าอะไรทำได้เลย อะไรต้องรอคุณ และงานของคุณตรวจกับอะไร
@@ -65,6 +67,7 @@ plugins/yolo-stack/
     ├── yolo-mode/              # router: trigger, สารบัญ principle, autonomy, playbook
     │   ├── playbooks/          # authoring-a-skill, session-pickup, _template
     │   └── references/         # mode-template, principle-template, codex-tools
+    ├── setup-yolo-stack/       # เลือกโมเดลต่อบทบาท และเปิดปิด hook ตอนเริ่ม session
     ├── get-started/            # สัมภาษณ์สี่ข้อ แล้วสร้าง ~/.yolo-stack/ ให้
     ├── capture-playbook/       # สัมภาษณ์คนจากงานจริง แล้วเขียนเป็น playbook
     ├── figure-it-out/          # ออกแบบขั้นตอนเองเมื่องานใหญ่และยังไม่มี playbook
@@ -88,7 +91,7 @@ Skill แบ่งเป็นสองชั้นตามตาราง trig
 
 | ชั้น | Skill | ถูกเรียกอย่างไร |
 |---|---|---|
-| ต่อสายแล้ว | principle ทั้งเจ็ดข้อ, `get-started`, `capture-playbook`, `figure-it-out`, `show-me-your-work`, `unslop`, `reflect` | `yolo-mode` เรียกเองเมื่อสถานการณ์ตรง |
+| ต่อสายแล้ว | principle ทั้งเจ็ดข้อ, `setup-yolo-stack`, `get-started`, `capture-playbook`, `figure-it-out`, `show-me-your-work`, `unslop`, `reflect` | `yolo-mode` เรียกเองเมื่อสถานการณ์ตรง |
 | แปะไว้ | `recall`, `why`, `interrogate`, `swarm`, `arena`, `automate-me` | คุณพิมพ์ชื่อเรียก |
 
 การเลื่อนชั้นคือการย้ายหนึ่งบรรทัดใน `skills/yolo-mode/SKILL.md` จากรายการ "Shipped, not wired" ขึ้นไปรายการ "Wired"
