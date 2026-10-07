@@ -17,6 +17,8 @@ Verify every output by checking the real thing directly. Do not infer from a pro
 4. Script the check when you can. A script that reruns the same comparison beats a one-time look, and its output is an artifact a reviewer reruns instead of trusting your word.
 5. When a check fails, suspect the way you checked before you suspect the thing.
 
+Check the process as well as the result. A correct result can rest on a broken process: a clause rebuilt from what the human pasted instead of the signed document, a limit met by chance from a file never opened. For each fact you relied on, name the record it came from, and confirm that record is one of the human's Real things.
+
 Say how far the proof went. Stated without a pointer, pointed at the source, or rerun by script are different strengths, and the reply names which one applies. `INCONCLUSIVE` is a valid result and is never reported as a pass.
 
 **You skipped this if:** a claim has no pointer, or its pointer leads to a file the agent created.
