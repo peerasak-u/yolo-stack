@@ -17,6 +17,8 @@ Three things must be true. If one is missing, stop and say which.
 - **One real case.** A finished instance of the job is open in front of both of you. Ask for it if it is not there.
 - **They talk, you write.** They should not have to type more than a sentence at a time.
 
+The playbook goes to the human's own stack at `~/.yolo-stack/`. If `~/.yolo-stack/mode.md` does not exist, create it from [`../yolo-mode/references/mode-template.md`](../yolo-mode/references/mode-template.md) with empty lists before the walk.
+
 Read the case yourself first. What a document contains is a fact you look up, never a question for them. Ask only what the case cannot show: what they looked at, why, and how they decided.
 
 ## The walk
@@ -43,12 +45,12 @@ If a second finished case is at hand, check the steps against it. A step that di
 
 ## Write it
 
-1. Write the playbook from [`../yolo-mode/playbooks/_template.md`](../yolo-mode/playbooks/_template.md), following the **Authoring or modifying a skill** playbook. One action per step. Mark any step you inferred and they did not say with `(inferred)`, and ask about each before finishing.
+1. Write the playbook to `~/.yolo-stack/playbooks/<stem>.md` from [`../yolo-mode/playbooks/_template.md`](../yolo-mode/playbooks/_template.md), in their language. One action per step. Mark any step you inferred and they did not say with `(inferred)`, and ask about each before finishing.
 2. Sort what else the walk produced:
-   - Answers to question 5 go to them as proposed additions to the Autonomy lists in the **yolo-mode** skill.
-   - What they checked a result against, from questions 2 and 4, goes to them as the proposed "real thing" for the **principle-prove-it** skill.
+   - Answers to question 5 go to them as proposed additions to the Autonomy lists in `~/.yolo-stack/mode.md`.
+   - What they checked a result against, from questions 2 and 4, goes to them as proposed additions to Real things in the same file, which the **principle-prove-it** skill checks against.
    - Each doubt from question 3, and each stated rule, becomes one entry in `corrections.md` at the project root, with the case it came from. These are single occurrences. They are not principles yet. The **reflect** skill counts them later.
-3. Add the playbook's line to the Playbooks section of the **yolo-mode** skill and run `node tools/check-refs.mjs`.
+3. Add the playbook's line to Playbooks in `~/.yolo-stack/mode.md` and run `node tools/check-refs.mjs --personal` from the stack root.
 
 Do not write a principle in this skill. One case is one occurrence.
 

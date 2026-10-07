@@ -1,13 +1,13 @@
 ---
 name: interrogate
-description: "Use for \"interrogate\", \"adversarial review\", \"multi-model review\", \"challenge this\", \"stress test this code\", \"find blind spots\", or \"tear this apart\". Multiple LLM reviewers challenge changes from independent angles."
+description: "Use for \"interrogate\", \"adversarial review\", \"multi-model review\", \"challenge this\", \"stress test this\", \"find blind spots\", \"poke holes in this\", or \"tear this apart\". Reviewers on different models independently challenge a piece of work: a report, a contract review, a spreadsheet, a plan."
 ---
 
 # Interrogate
 
 On Codex, read the [platform mapping](../yolo-mode/references/codex-tools.md), including its per-skill notes, before following this skill.
 
-Spawn one reviewer per configured model to adversarially review code changes. Each model gets the same prompt and rubric. The adversarial signal comes from model diversity, not assigned personas.
+Spawn one reviewer per configured model to adversarially review a piece of work. Each model gets the same prompt and rubric. The adversarial signal comes from model diversity, not assigned personas.
 
 The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
@@ -15,20 +15,19 @@ The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
 Identify what to review from context:
 
-- If the user points at specific files or a diff, use that
-- If on a feature branch, run `git diff main...HEAD` (or the appropriate base branch) for the full changeset
+- If the user points at specific files or a passage, use that
+- If the work is a change to something that existed, gather the before and the after (`git diff` if the folder is a git repository)
 - If the user's message references recent work, gather the relevant files
 
-Package the diff (or file contents) plus any surrounding context files the reviewers need to understand the code.
+Package the work plus any source material the reviewers need to check it.
 
 ## Step 2, State the Intent
 
 Before spawning reviewers, state the intent explicitly. Derive this from:
 
 - The user's message
-- Commit messages
-- PR description if one exists
-- The code itself
+- The request or brief the work answers
+- The work itself
 
 Write one clear paragraph. If you're unsure about the intent, ask the user before proceeding.
 
@@ -47,15 +46,14 @@ For each reviewer:
 - `model`: the configured `interrogate reviewers` entry, or the table default with no configured line. For an `auto` or `inherit-parent` entry, omit `model` so that reviewer runs on the parent model.
 - `readonly`: `true`
 
-If the `Agent` tool rejects a configured entry, run that reviewer on the table default of its family and say so. Families go by model name, such as Opus, Fable, or Sonnet. With no family match, use Reviewer A's default. If it rejects a table default, check the valid slugs in the `Agent` tool's error message, pick the closest equivalent (prefer the highest-reasoning tier of the same family), spawn with it, and open a separate PR to update the default table. Do not block the review on the slug issue. Never treat an alias entry as a rejected slug or apply either fallback to it.
+If the `Agent` tool rejects a configured entry, run that reviewer on the table default of its family and say so. Families go by model name, such as Opus, Fable, or Sonnet. With no family match, use Reviewer A's default. If it rejects a table default, check the valid slugs in the `Agent` tool's error message, pick the closest equivalent (prefer the highest-reasoning tier of the same family), spawn with it, and tell the user the default table needs updating. Do not block the review on the slug issue. Never treat an alias entry as a rejected slug or apply either fallback to it.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent
-2. The diff or file contents
+2. The work under review
 3. The review rubric from `references/rubric.md`
-4. The code-quality lens from `references/code-quality-review.md`
 
-The same filled template goes to all reviewers, so every model applies the code-quality lens.
+The same filled template goes to all reviewers.
 
 ## Step 4, Synthesize
 
@@ -69,15 +67,15 @@ As results come back, build a unified picture:
 
 ## Step 5, Lead Judgment
 
-You are the lead reviewer, a pragmatic senior engineer, not a neutral aggregator.
+You are the lead reviewer, a pragmatic senior colleague, not a neutral aggregator.
 
 Read `references/lead-judgment.md` for the full framework.
 
 Categorize every finding using these buckets:
 
-- **Act on**. Real issues affecting correctness, security, or maintainability given the actual goals. These would block a real PR.
+- **Act on**. Real issues affecting correctness, risk, or fitness for purpose given the actual goals. These would stop the work going out.
 - **Consider**. Legitimate points, but you're not sure they outweigh the cost of addressing them right now. Worth the user's attention.
-- **Noted**. Technically valid but not actionable. Context-dependent, premature optimization, or low-impact given the current stage.
+- **Noted**. Technically valid but not actionable. Context-dependent or low-impact given the current stage.
 - **Dismissed**. Wrong, nitpicky, or missing context. Brief explanation why.
 
 For each finding, include:

@@ -1,77 +1,69 @@
 # Review Rubric
 
-Review through whichever lenses are relevant. Not every lens applies to every change. Use judgment.
+Review through whichever lenses are relevant. Not every lens applies to every piece of work. Use judgment.
 
 ## Correctness
 
-Does the code actually do what the intent says it should?
+Does the work do what the intent says it should?
 
-- Edge cases: empty inputs, nil/undefined, boundary values, concurrent access
-- Error handling: are errors caught, propagated, or silently swallowed?
-- Off-by-one, type coercion, integer overflow, string encoding
-- State management: race conditions, stale closures, dangling references
-- Does the happy path work? Does the sad path work?
-- Idempotency: what happens if this operation runs twice, or if a previous run crashed halfway? If the answer is "it depends on what state was left behind," there's a missing reconciliation step.
-- Concurrency: if multiple actors can touch the same mutable state (files, branches, shared data), is access serialized structurally (locks, sequential phases, exclusive ownership), or by conventions that won't hold?
+- Facts, figures, dates, names, and references: does each match its source?
+- Arithmetic: do the totals add up, and does a number agree everywhere it repeats?
+- Internal consistency: does one section contradict another? Is a defined term used the same way throughout?
+- Edge cases: the empty case, the boundary value, the exception the rule didn't foresee
+- Does the normal case work? Does the exceptional case?
+- Repeat use: what happens if this is applied twice, or picked up after someone stopped halfway?
 
-When you find a potential bug, trace the execution path. Don't just flag "this could be nil". Show the call chain that makes it nil.
+When you find a potential error, trace it. Don't just flag "this could be wrong". Show the source and the place where the work departs from it.
 
 ## Root Causes vs. Symptoms
 
-Is the code fixing the actual problem or papering over a symptom?
+Is the work fixing the actual problem or papering over a symptom?
 
-Answering this often requires looking beyond the changed files. Read the surrounding code (callers, callees, type definitions, sibling modules) and understand the architecture the change lives in. Use the tools available to you (Read, Grep, Glob) to explore. Follow the call chain. Read the types. Understand why the code exists before judging whether the change addresses the right layer.
+Answering this often requires looking beyond the piece under review. Read the source documents, the earlier version, and what the work relies on. Use the tools available to you (Read, Grep, Glob) to explore. Understand why the piece exists before judging whether it addresses the right thing.
 
-- Guard clauses that mask a deeper invariant violation
-- Retry logic that hides a broken contract
-- Type casts that silence a modeling error
-- If you see a workaround, ask: why is the workaround needed? What would a proper fix look like?
-- A fix in module A that should really be a fix in module B's contract
-- Instructions where structure would be better: if the fix is a comment saying "don't do X" or a convention someone has to remember, ask whether it could instead be a type constraint, a lint rule, or a runtime check that makes the wrong thing impossible
+- A manual adjustment that hides a broken formula or process
+- An exception that hides a flawed rule
+- If you see a workaround, ask why it is needed and what a proper fix would look like
+- A fix made here that belongs in the template, the policy, or the upstream record
+- Instructions where structure would be better: if the fix is a note saying "don't do X" or a convention someone has to remember, ask whether a locked cell, a template, or a check could make the wrong thing impossible
 
-## Structural Integrity
+## Fit
 
-Does the code fit well into the system it's part of?
+Does the work fit what surrounds it?
 
-- Boundary discipline: is validation at system boundaries, or scattered through business logic? Validate data once where it enters the system, then trust it internally.
-- Abstraction level: is the code mixing high-level orchestration with low-level detail?
-- Coupling: does this change introduce dependencies that will make future changes harder?
-- Data model fit: do the data structures match the actual access patterns? The right structure makes downstream code obvious. The wrong one fights you at every turn.
-- Bolted-on vs. integrated: was the change patched onto the existing design, or does it read as if the design always accounted for it? If the new requirement had been known from the start, would the code look like this?
-- Legacy dual-paths: does the change introduce a new API while keeping the old one alive? If there are no external consumers, migrate callers and delete the old path in the same wave. Don't leave compatibility layers that will become permanent.
+- Does it follow the template, the standard, or the earlier documents it has to agree with?
+- Level: does it mix the summary with low-level detail?
+- Dependencies: does it rely on something that will make later changes harder?
+- Bolted-on vs. integrated: was the change patched onto the existing piece, or does it read as if the piece always accounted for it?
+- Two versions of the truth: does it leave the old figure, clause, or process alive beside the new one? If nothing depends on the old one, remove it in the same pass.
 
-Don't penalize simple code for lacking abstraction. Premature abstraction is worse than duplication.
+Don't penalize simple work for lacking structure.
 
 ## Verification
 
-Can you tell that this code works from reading it?
+Can a reader tell that this is right?
 
-- Are there tests? Do they test behavior or implementation details?
-- Are there assertions/invariants that would catch regressions?
-- If this is a bug fix: is there a test for the bug?
-- If this touches an integration boundary: is the full path tested?
-- Check the real thing, not a proxy. If the code checks liveness via file mtime or cached state instead of reading the actual value, that's a verification gap.
-- For delegated or async work: does the code verify actual output artifacts, or does it trust self-reports and summaries?
+- Does each claim name its source? Does each figure tie back to a record?
+- Was the real thing checked, or a proxy? A summary of a document is not the document.
+- If this corrects an error: is there a check that would catch the error next time?
+- For delegated work: was the output itself checked, or was the report about it trusted?
 
 ## Complexity Budget
 
-Is the complexity justified by what the code accomplishes?
+Is the complexity justified by what the work accomplishes?
 
-- Code that could be simpler without losing correctness or clarity
-- Abstractions that serve only one call site
-- Configuration or parameterization for cases that don't exist yet
-- Dead code, unused imports, vestigial parameters
-- Over-engineering: "just in case" code paths with no current callers
-- Obsolete compatibility paths kept alive for transitional stability that's no longer needed. If the migration is done, delete the scaffolding
-- Does the user experience justify the complexity? Every feature, control, and option should earn its place. Half-finished features are worse than missing ones.
+- Work that could be shorter or simpler without losing correctness or clarity
+- Sections, options, or caveats for cases that don't exist yet
+- Dead material: leftover template text, unused sheets, superseded clauses
+- Does the reader's benefit justify each part? A half-finished section is worse than a missing one.
 
-Simpler is better unless simpler is wrong. Three lines of duplication beat a premature abstraction.
+Simpler is better unless simpler is wrong.
 
-## Security
+## Risk
 
-For each security finding, trace the input path through the code and show it.
+For each risk finding, show where it sits in the work and who it would reach.
 
-- User input flowing to dangerous sinks (SQL, shell, eval, innerHTML) without sanitization
-- Authentication/authorization gaps in new endpoints
-- Secrets in code, logs, or error messages
-- TOCTOU (time-of-check-time-of-use) in security-critical paths
+- Confidential or personal information the recipient should not see
+- Hidden content that travels with the file: tracked changes, comments, hidden sheets or columns, file properties
+- Commitments, admissions, or deadlines the author did not intend to make
+- What happens if this is wrong and someone relies on it

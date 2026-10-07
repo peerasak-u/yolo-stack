@@ -57,17 +57,20 @@ Before applying any Accepted edit, present the synthesizer's full Accepted/Rejec
 
 Backlog items file to whatever devex / backlog tracker your team uses automatically. Only the Accepted list waits for approval.
 
+What the human taught goes to their own stack at `~/.yolo-stack/`: an edit to one of their playbooks, a new principle, a change to their Autonomy or Real things lists. An edit to a shipped skill survives only when the stack root is a checkout the human owns. When the stack root is under a plugin cache, route that item to their own stack as a principle or a playbook line, or move it to Backlog.
+
 For each approved Accepted item, follow the Routing field exactly:
 
 - Trivial existing-skill edit (a one-line bullet, a tightened sentence, a stale fact corrected): parent does directly.
 - Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): hand to the **authoring-a-skill** playbook and run its draft / test / iterate loop.
 - `tune description: <skill path>` (the skill exists but didn't trigger when it should have): hand to `authoring-a-skill` and run its description-optimization loop.
 - `new skill via authoring-a-skill: <kebab-name>`: hand creation to `authoring-a-skill`. Do not invent the shape ad hoc.
-- `new principle: <kebab-name>`: a correction with at least two cited occurrences, no existing principle that covers it, and no structural fix. Draft it from `../yolo-mode/references/principle-template.md`, put both occurrences in its Evidence line, and add its one-line entry to the Principles index in the **yolo-mode** skill.
+- `new principle: <kebab-name>`: a correction with at least two cited occurrences, no existing principle that covers it, and no structural fix. Draft it at `~/.yolo-stack/principles/<kebab-name>.md` from `../yolo-mode/references/principle-template.md`, put both occurrences in its Evidence line, and add its one-line entry to Principles in `~/.yolo-stack/mode.md`.
+- `replace shipped principle: <principle name>`: a shipped principle that the human's corrections contradict. Write the rule they follow as a personal principle that names the one it replaces. The personal one wins.
 
 After applying, move each inbox entry that was applied or rejected under a `## Processed` heading in `corrections.md` with its outcome. Never delete an entry.
 
-If your environment ships a SKILL.md validator, run it on every touched skill before declaring done. Skip this step if it doesn't.
+Run `node tools/check-refs.mjs --personal` from the stack root after any change to the human's own stack, and `node tools/check-refs.mjs` after any change to a shipped skill.
 
 ### 6. Summarize for the user
 

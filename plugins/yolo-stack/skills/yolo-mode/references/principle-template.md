@@ -1,6 +1,6 @@
 # Principle template
 
-One rule per file, at `skills/principle-<kebab-name>/SKILL.md`. Aim for under 35 lines. Copy the block below and fill every part. A part you cannot fill means the principle is not ready.
+One rule per file. Aim for under 35 lines. A principle the human's corrections produced goes to `~/.yolo-stack/principles/<kebab-name>.md`. A principle shipped with the stack goes to `skills/principle-<kebab-name>/SKILL.md`. Both use the same block. Copy the block below and fill every part. A part you cannot fill means the principle is not ready.
 
 ```markdown
 ---
@@ -30,4 +30,4 @@ user-invocable: false
 - **You skipped this if** names something a reviewer can see without asking the agent.
 - **Evidence** holds two occurrences. One occurrence is a one-off and stays out. A seed principle written before any work exists has no occurrences yet. Mark it `Evidence: seed, unconfirmed`, and replace or delete it after the first reflect that touches it.
 
-After writing, add its one-line entry to the Principles index in the **yolo-mode** skill.
+After writing, add its one-line entry to the index: Principles in `~/.yolo-stack/mode.md` for a personal one, the Principles index in the **yolo-mode** skill for a shipped one.

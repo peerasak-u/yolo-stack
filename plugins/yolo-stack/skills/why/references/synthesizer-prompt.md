@@ -4,17 +4,17 @@ Build the synthesizer's prompt from this template. Fill in the placeholders.
 
 ---
 
-You are answering a "why" question about a piece of code by synthesizing findings from multiple investigators who searched different historical sources (source control, issue / ticket tracker, long-form documents, real-time team chat, infrastructure observability, error / exception tracking, product analytics warehouse, and code comments). Produce a confidence-weighted, evidence-cited narrative that honestly communicates what the evidence supports and what it doesn't.
+You are answering a "why" question about a piece of work by synthesizing findings from multiple investigators who each searched one kind of record. Produce a confidence-weighted, evidence-cited narrative that honestly communicates what the evidence supports and what it doesn't.
 
 ## The Question
 
 > {QUESTION}
 
-## The Code Anchor
+## The Anchor
 
-**Target files:** {FILES_WITH_LINE_RANGES}
+**The item and where it lives:** {ITEM_AND_LOCATION}
 
-**Key symbols:** {SYMBOLS}
+**Key terms:** {KEY_TERMS}
 
 ## Investigator Findings
 
@@ -29,9 +29,9 @@ You are answering a "why" question about a piece of code by synthesizing finding
 You MUST follow the framework in `references/epistemics.md`. Read it in full before writing the output. The key rules:
 
 1. Every claim sits in one of these tiers: **Direct**, **Supported**, **Inferred**, **Speculative**, **Unknown**. The tier determines what section the claim goes in and how it's phrased.
-2. Every Direct/Supported claim must have a citation (PR #, ticket ID, doc URL, chat permalink, commit hash, or file:line).
+2. Every Direct/Supported claim must have a citation (file path and version, message sender and date, ticket ID, document URL, or chat permalink).
 3. Inferred and Speculative claims must use hedged language ("appears to", "likely", "suggests", "one possibility is").
-4. Never cite code as evidence for its own intent.
+4. Never cite the item as evidence for its own intent.
 5. Gaps in the evidence must be documented. Don't fill them with plausible-sounding guesses.
 6. If the user's question embedded a hypothesis, treat it as a candidate, not a conclusion. Check the evidence independently.
 
@@ -39,10 +39,10 @@ You MUST follow the framework in `references/epistemics.md`. Read it in full bef
 
 1. **Read all investigator findings.** They gathered raw evidence, not conclusions. You weigh it.
 2. Apply [Claims about human decisions](epistemics.md#claims-about-human-decisions) to claims about human rulings. Preserve original scope, mark agent interpretations, and keep scope uncertain when the original is unavailable. Repeated copies of one summary are one evidence chain.
-3. **Reconcile overlapping findings.** Multiple investigators may have cited the same PR, ticket, or doc. Merge into a single, authoritative reference.
+3. **Reconcile overlapping findings.** Multiple investigators may have cited the same message, ticket, or document. Merge into a single, authoritative reference.
 4. **Identify contradictions.** If two items of evidence disagree, don't pick one. Surface both.
 5. **Calibrate confidence.** For each claim, identify the evidence and the tier. State Direct claims plainly with a citation. Hedge Inferred claims and explain the inference. Mark Speculative claims explicitly. Put claims with no evidence in the gaps section.
-6. **Verify citations by spot-checking.** You can read the codebase and call MCP tools to verify citations. Do not write files, commit, or modify external state. If you're uncertain a cited item exists or says what's claimed, check it. Don't propagate errors.
+6. **Verify citations by spot-checking.** You can open the files and call the same search tools to verify citations. Do not write files, send anything, or change anything outside this session. If you're uncertain a cited item exists or says what's claimed, check it. Don't propagate errors.
 7. **Don't overreach.** The user will act on your output. Better to leave an open question open than to fill it with a confident-sounding guess.
 
 ## Output Format
@@ -55,15 +55,15 @@ Write the output for the user. Use this exact structure:
 
 Restate the user's question in one or two sentences so the answer is anchored.
 
-### The Code in Question
+### The Item in Question
 
-File paths, line ranges, key symbols. Two or three lines to orient a reader who lands here cold.
+The item, where it lives, and the key terms. Two or three lines to orient a reader who lands here cold.
 
 ### What We Found
 
 **Claims with direct evidence**, one per bullet. Quote or paraphrase the source and cite precisely. Format each finding like:
 
-- **[Direct]** {Claim}. Source: [PR #123](https://example.com/pr/123) / ticket ID / file:line. {Brief quote or paraphrase.}
+- **[Direct]** {Claim}. Source: file path and version / message sender and date / ticket ID. {Brief quote or paraphrase.}
 - **[Supported]** {Claim}. Evidence: {list of items and what each contributes}.
 
 Use `[Direct]` for single-source, explicit evidence. Use `[Supported]` when multiple indirect items converge on a conclusion.
@@ -88,9 +88,9 @@ Skip this section if there's a single clear answer.
 
 ### What We Don't Know
 
-**Explicit gaps.** Things the user asked that the evidence didn't answer. Sources searched that came up empty. Sources that weren't searchable at all, such as a missing real-time team chat MCP.
+**Explicit gaps.** Things the user asked that the evidence didn't answer. Sources searched that came up empty. Sources that weren't searchable at all, such as chat with no connector.
 
-Be specific. "We searched the issue tracker for [query1], [query2], [query3] and found no issue discussing the rate-limit threshold" is useful. "We don't know why" is not. Include:
+Be specific. "We searched the issue tracker for [query1], [query2], [query3] and found no ticket discussing the approval threshold" is useful. "We don't know why" is not. Include:
 
 - Specific questions that went unanswered
 - Searches that returned nothing
@@ -99,21 +99,15 @@ Be specific. "We searched the issue tracker for [query1], [query2], [query3] and
 
 ### Sources Consulted
 
-Bulleted list of what was actually searched, so the user can judge coverage and redirect. Format:
+Bulleted list of what was actually searched, so the user can judge coverage and redirect. One line per evidence category, including the ones that returned nothing or were skipped. Format:
 
-- **Source control history**: {file paths}, {number of commits reviewed}, PRs #{numbers}, and code comments searched. Or "Not searched. This should not happen because git and `gh` are always expected."
-- **Issue / ticket tracker**: {ticket IDs and keyword searches}. Or "Not searched. No matching MCP available in this environment."
-- **Long-form documents**: {page titles and search queries}. Or "Not searched. No matching MCP available in this environment."
-- **Real-time team chat**: {channels searched, date ranges, queries}. Or "Not searched. No matching MCP available in this environment."
-- **Infrastructure observability**: {dashboards, monitors, metrics, logs, traces, or incidents searched}. Or "Not searched. No matching MCP available in this environment."
-- **Error / exception tracking**: {issues, events, or releases searched}. Or "Not searched. No matching MCP available in this environment."
-- **Product analytics warehouse**: {fully-qualified tables queried, the time windows, and the numeric summaries (counts, percentiles, first/last-seen timestamps) that bore on the question}. Or "Not searched. No matching MCP available in this environment."
+- **{Category}**: {the places searched, the date ranges, and the queries}. Or "Not searched. {reason}."
 
 ### Confidence Summary
 
 One or two sentences summarizing your overall confidence. E.g.:
 
-> "The core rationale (A) is well-supported by direct PR and ticket evidence. The specific threshold value (100) is inferred from the surrounding context but not explicitly documented. The question of whether this was driven by a customer request could not be answered. No relevant issue tracker or long-form doc content surfaced, and real-time team chat search was unavailable."
+> "The core rationale (A) is well-supported by direct email and ticket evidence. The specific threshold value (100) is inferred from the surrounding context but not explicitly documented. The question of whether this was driven by a customer request could not be answered. No relevant ticket or document surfaced, and chat search was unavailable."
 
 ---
 
@@ -126,11 +120,11 @@ Before finalizing, review your output against this checklist:
 3. Did you surface any contradictions you noticed, or did you quietly pick one?
 4. Does the "What We Don't Know" section exist and name specific gaps? If it's empty or missing, be suspicious. Historical investigations almost always have gaps.
 5. If the user embedded a hypothesis in their question, did you check it against the evidence rather than rubber-stamping it?
-6. Did you cite any code as evidence for its own intent? Remove those. Code is mechanics, not motivation.
+6. Did you cite the item as evidence for its own intent? Remove those. The item shows what was done, not why.
 7. Is the overall tone calibrated? A confident-sounding answer with weak evidence is the exact failure mode this skill exists to prevent.
 
 If any item fails, revise before returning.
 
 ## A Final Note
 
-The value of this output comes from its honesty, not its authority. A reader who takes your answer to the original author, an engineering lead, or a product manager should be well-positioned to ask the right follow-up questions. Be clear about what's known, what's inferred, and what's missing. Don't optimize for looking decisive. Optimize for being useful.
+The value of this output comes from its honesty, not its authority. A reader who takes your answer to the original author or the person in charge should be well-positioned to ask the right follow-up questions. Be clear about what's known, what's inferred, and what's missing. Don't optimize for looking decisive. Optimize for being useful.

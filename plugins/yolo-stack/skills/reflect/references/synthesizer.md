@@ -43,6 +43,7 @@ Output exactly the format below. No preamble, no narration. One sentence per cel
 | <skill existed but didn't trigger> | <tune the skill's description so it fires next time> | <tune description: <skill path>> |
 | <new pattern, no existing skill is a real home> | <draft a new skill via authoring-a-skill> | <new skill via authoring-a-skill: <kebab-name>> |
 | <recurring correction, two or more cited occurrences, judgment not script> | <draft a new principle from the principle template> | <new principle: <kebab-name>> |
+| <a shipped principle that the human's corrections contradict> | <write the rule they follow as a personal principle that names the one it replaces> | <replace shipped principle: <principle name>> |
 
 One row per finding. The user approves row by row.
 

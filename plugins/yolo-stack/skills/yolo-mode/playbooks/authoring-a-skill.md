@@ -2,6 +2,8 @@
 
 **You own the skill's voice.**
 
+This playbook is for files that ship with the stack. The human's own playbooks and principles go to `~/.yolo-stack/` and are indexed in its `mode.md`. They are validated with `node tools/check-refs.mjs --personal`, and steps 5 and 6 do not apply to them.
+
 1. Draft. A skill is a folder with a `SKILL.md` whose frontmatter has `name` (matching the folder) and `description` as one quoted YAML scalar. A principle starts from [`../references/principle-template.md`](../references/principle-template.md). A playbook starts from [`_template.md`](_template.md).
 2. Write the description as a trigger. It says when to open the file, in the words a task would actually use. An agent sees only this line until the situation matches.
 3. Validate. Run `node tools/check-refs.mjs` from the stack root. It fails on missing frontmatter, a `name` that differs from its folder, a broken relative link, a skill or playbook named in bold that does not exist, and a skill that the mode file never mentions.

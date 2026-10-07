@@ -9,6 +9,15 @@ This file routes. It does not teach. Each trigger names a leaf, and you read the
 
 On Codex, read [`references/codex-tools.md`](references/codex-tools.md) for the Codex equivalent of a Claude tool or model named by these skills.
 
+## Personal stack
+
+What the human taught lives in `~/.yolo-stack/`, outside this plugin, so a plugin update never erases it. The session hook reports whether it exists. Layout and rules are in [`references/mode-template.md`](references/mode-template.md).
+
+- It exists → read `~/.yolo-stack/mode.md` right after this file. Its Autonomy lists add to the ones below. Its Real things are what the **principle-prove-it** skill checks against. Its playbooks and principles are matched before the shipped ones, and each is read in full when its line matches.
+- It does not exist → the **get-started** skill builds it by interview. Offer it once. Do not run it unasked.
+
+Never write the human's lists, playbooks, or principles into the plugin folder.
+
 Use the session's task-tracking tool for the todolist. If none is available, keep an uncommitted `todo.md` checklist in the work dir with the playbook steps verbatim and each `skip: <reason>` line.
 
 ## Triggers
@@ -19,7 +28,9 @@ Wired. These fire on their own.
 - Writing the same instruction or correction a second time → the **principle-encode-lessons-in-structure** skill.
 - Long, multi-step, or unattended work, or work a human reviews after stepping away → a decision trail via the **show-me-your-work** skill.
 - Any prose a human will read, including your reply → the **unslop** skill.
+- The human asks how to start, or asks to be set up → the **get-started** skill.
 - A person wants to teach how they do a recurring job, or a job that will recur has no playbook → the **capture-playbook** skill.
+- A large or unfamiliar multi-step task matches no playbook, shipped or personal → the **figure-it-out** skill.
 - Writing or editing a SKILL.md, a principle, or a playbook → the **Authoring or modifying a skill** playbook.
 - The human says "reflect", or corrects the same thing twice in one session → offer the **reflect** skill at the end of the task. Do not run it unasked.
 
@@ -38,12 +49,19 @@ Read the leaf skill in full before you apply or cite a principle. In your reply,
 
 - **Prove It** (**principle-prove-it**). After a task, before declaring done. Check the real thing, not a proxy or a self-report.
 - **Encode Lessons in Structure** (**principle-encode-lessons-in-structure**). The same instruction comes up a second time. Make it a script or check instead of more text.
+- **Fix Root Causes** (**principle-fix-root-causes**). Something came out wrong and you are about to correct it. Fix what produced the error, not where it showed up.
+- **Attack the Premise** (**principle-attack-the-premise**). Two or more attempts that share an assumption have failed. Write the assumption down and check it before trying again.
+- **Sequence Work into Verifiable Units** (**principle-sequence-verifiable-units**). Work with many similar steps or parts. Small units, each checked before the next.
+- **Explain the Number** (**principle-explain-the-number**). Before you trust, report, or act on a number. Say what it is made of and rule out that it counted something else.
+- **Never Block on the Human** (**principle-never-block-on-the-human**). Tempted to ask "should I do X?" about work that can be undone. Do it, show it, let the human correct it.
 
-New principles enter this index through **reflect**, shaped by [`references/principle-template.md`](references/principle-template.md). Do not add one without two cited occurrences.
+These seven ship with the stack. They hold in most kinds of work, and none has been confirmed in this human's. A personal principle that names one of them replaces it, and the **reflect** skill proposes that when their corrections contradict one.
+
+The human's own principles enter through **reflect**, shaped by [`references/principle-template.md`](references/principle-template.md), and are indexed in `~/.yolo-stack/mode.md`. Do not add one without two cited occurrences.
 
 ## Autonomy
 
-Replace the examples in this section with the domain's own lists before first use.
+These lists are the floor for any kind of work. The human's own lists in `~/.yolo-stack/mode.md` add to them.
 
 **Just do it.** Work that can be undone proceeds without asking: drafts, local files, analysis, scripts run against copies.
 
@@ -75,4 +93,4 @@ Match the task to a playbook, open its file, and copy its steps into the todolis
 - **Authoring or modifying a skill.** Writing or editing a SKILL.md, a principle, or a playbook. `playbooks/authoring-a-skill.md`.
 - **Session pickup.** Resuming or taking over a prior agent's in-flight work. `playbooks/session-pickup.md`.
 
-The domain's own playbooks go here, one line each. The **capture-playbook** skill writes them from `playbooks/_template.md`. No playbook fits → say so and do the task with the wired triggers. If the task shape will recur, offer the **capture-playbook** skill afterward.
+The human's own playbooks are indexed in `~/.yolo-stack/mode.md`, one line each. The **capture-playbook** skill writes them from `playbooks/_template.md`. No playbook fits → a large or unfamiliar task goes to the **figure-it-out** skill, and a small one proceeds with the wired triggers. Say which. If the task shape will recur, offer the **capture-playbook** skill afterward.
