@@ -24,7 +24,7 @@ Read `~/.yolo-stack/mode.md` if it exists. A filled stack is not overwritten. Re
 
 ## Write it
 
-1. Write `~/.yolo-stack/mode.md` from the template. Answers to question 2 go under Always pause, question 3 under Just do it, question 4 under Real things. Delete the placeholder lines under Playbooks and Principles.
+1. Write `~/.yolo-stack/mode.md` from the template. Answers to question 2 go under Always pause, question 3 under Just do it, question 4 under Real things. Under Reply, write the language they answered in and any preference they stated without being asked. Delete the placeholder lines under Playbooks and Principles.
 2. Read it back in plain words and fix it until they say it is right.
 3. Run `node tools/check-refs.mjs --personal` from the stack root. It must print `ok`.
 4. Pick the first job. From the list in question 1, take the one they do most often and have a finished case of at hand. Hand that job to the **capture-playbook** skill. With no finished case at hand, stop here and tell them what to bring next time.

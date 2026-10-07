@@ -7,42 +7,40 @@ description: "The stack's router. Maps a situation to the skill, principle, or p
 
 This file routes. It does not teach. Each trigger names a leaf, and you read the leaf in full when its trigger fires.
 
-On Codex, read [`references/codex-tools.md`](references/codex-tools.md) for the Codex equivalent of a Claude tool or model named by these skills.
+## Platform
+
+These skills use Claude Code tool names (the `Skill` tool, the `Agent` tool, `AskUserQuestion`) and the Claude model names the `Agent` tool accepts. On Claude Code they work as written. On Codex, read [`references/codex-tools.md`](references/codex-tools.md) for the Codex equivalent of a tool, a model, or a path named by these skills.
+
+Use the session's task-tracking tool for the todolist. If none is available, keep an uncommitted `todo.md` checklist in the work dir with the playbook steps verbatim and each `skip: <reason>` line.
 
 ## Personal stack
 
 What the human taught lives in `~/.yolo-stack/`, outside this plugin, so a plugin update never erases it. The session hook reports whether it exists. Layout and rules are in [`references/mode-template.md`](references/mode-template.md).
 
-- It exists → read `~/.yolo-stack/mode.md` right after this file. Its Autonomy lists add to the ones below. Its Real things are what the **principle-prove-it** skill checks against. Its playbooks and principles are matched before the shipped ones, and each is read in full when its line matches.
+- It exists → read `~/.yolo-stack/mode.md` right after this file. Its Autonomy lists add to the ones below. Its Real things are what the **principle-prove-it** skill checks against. Its Reply section adds to Writing the reply. Its playbooks and principles are matched before the shipped ones, and each is read in full when its line matches.
 - It does not exist → the **get-started** skill builds it by interview. Offer it once. Do not run it unasked.
 
 Never write the human's lists, playbooks, or principles into the plugin folder.
 
-Use the session's task-tracking tool for the todolist. If none is available, keep an uncommitted `todo.md` checklist in the work dir with the playbook steps verbatim and each `skip: <reason>` line.
-
 ## Triggers
 
-Wired. These fire on their own.
+The Principles section below grounds every trigger. Remaining triggers:
 
-- About to say a task is done, or about to report a result → the **principle-prove-it** skill.
-- Writing the same instruction or correction a second time → the **principle-encode-lessons-in-structure** skill.
-- Long, multi-step, or unattended work, or work a human reviews after stepping away → a decision trail via the **show-me-your-work** skill.
-- Any prose a human will read, including your reply → the **unslop** skill.
 - The human asks how to start, or asks to be set up → the **get-started** skill.
 - The human asks to change which models the stack uses, or to turn the session hook on or off → the **setup-yolo-stack** skill.
 - A person wants to teach how they do a recurring job, or a job that will recur has no playbook → the **capture-playbook** skill.
+- The human asks the agent to learn how they work from their past sessions → the **automate-me** skill.
+- The human asks where they left off, or resumes work on a named client, matter, or project from earlier sessions → the **recall** skill. One specific prior chat to continue is the **Session pickup** playbook instead.
+- A question about why something is the way it is, or who decided it and when → the **why** skill. The answer is read-only and cited.
 - A large or unfamiliar multi-step task matches no playbook, shipped or personal → the **figure-it-out** skill.
+- Parallel fan-out → the **swarm** skill when the job splits into independent slices, such as a batch of documents, many accounts, or several sources. Use the **arena** skill when one attempt at a draft, a plan, or a structure would fix the wrong shape. It runs several candidates, picks a base, and grafts the best parts of the others.
+- A contested conclusion or plan → the **interrogate** skill before the work leaves the human's hands.
+- Long, multi-step, or unattended work, or work a human reviews after stepping away → a decision trail via the **show-me-your-work** skill.
+- Any prose a human will read, including your reply → the **unslop** skill.
 - Writing or editing a SKILL.md, a principle, or a playbook → the **Authoring or modifying a skill** playbook.
 - The human says "reflect", or corrects the same thing twice in one session → offer the **reflect** skill at the end of the task. Do not run it unasked.
 
-Shipped, not wired. These skills are in the folder and work when the human names them. They have no trigger here on purpose. Promote one by moving its line into the wired list once a real task has shown when it should fire.
-
-- **recall**. Rebuild recent working context before resuming work.
-- **why**. Find out why something is the way it is from the recorded history. `recall` depends on it.
-- **interrogate**. Independent reviewers challenge a piece of work.
-- **swarm**. Parallel workers over slices of one job.
-- **arena**. Several candidates at one task, then graft the best parts.
-- **automate-me**. Mine weeks of history into a personal `-mode` skill.
+The fan-out skills (`recall`, `why`, `swarm`, `arena`, `interrogate`, `automate-me`, `reflect`) run several agents and cost several times a single pass. Before starting one the human did not name, say in one line which skill and why.
 
 ## Principles
 
@@ -81,6 +79,7 @@ Skills that fan out (`reflect`, `why`, `interrogate`, `swarm`, `arena`) set thei
 ## Writing the reply
 
 - Lead with what the reader most needs, which is usually the conclusion or the decision you need from them.
+- Write in the human's language.
 - Short declarative sentences. One thought per sentence.
 - Every claim carries its evidence or its label in the same sentence: measured, inferred, or guess.
 - Never hand the human a check you could run yourself.

@@ -28,6 +28,10 @@ Copy the block below to `~/.yolo-stack/mode.md` and fill every part in the perso
 
 - <What a claim is checked against in this work: the record, the document, the system.>
 
+## Reply
+
+- <How this person wants replies: language, length, format.>
+
 ## Playbooks
 
 - **<Name of the job>.** <When it applies.> `playbooks/<stem>.md`.
@@ -41,6 +45,7 @@ Copy the block below to `~/.yolo-stack/mode.md` and fill every part in the perso
 
 - **Autonomy** adds to the lists in the **yolo-mode** skill. It never removes an entry from Always pause there.
 - **Real things** is the list the **principle-prove-it** skill checks against.
+- **Reply** is optional. It adds to Writing the reply in the **yolo-mode** skill. Delete the section when the person has stated no preference.
 - **Playbooks** and **Principles** hold one line per file. A file with no line is never opened.
 
 After any change, run `node tools/check-refs.mjs --personal` from the stack root.

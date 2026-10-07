@@ -77,8 +77,9 @@ plugins/yolo-stack/
     ├── show-me-your-work/
     ├── reflect/
     ├── unslop/
-    ├── why/
-    └── recall/  automate-me/  interrogate/  swarm/  arena/
+    ├── why/  recall/           # หาเหตุผลจากบันทึก และรวบรวมงานที่ค้าง
+    ├── automate-me/            # อ่านแชตเก่า แล้วเสนอสิ่งที่ควรเพิ่มใน ~/.yolo-stack/
+    └── interrogate/  swarm/  arena/
 ```
 
 สามคำที่ต้องรู้
@@ -89,14 +90,23 @@ plugins/yolo-stack/
 | playbook | ขั้นตอนของงานหนึ่งชนิด | ตรวจใบแจ้งหนี้ก่อนจ่ายเงิน |
 | principle | กฎหนึ่งข้อที่ใช้ได้ข้ามงาน | ทุกข้อสรุปต้องชี้ไปที่เอกสารจริง |
 
-Skill แบ่งเป็นสองชั้นตามตาราง trigger ใน `yolo-mode`
+ทุก skill ต่อสายกับ `yolo-mode` แล้ว AI เรียกเองเมื่อสถานการณ์ตรง คุณไม่ต้องจำชื่อ
 
-| ชั้น | Skill | ถูกเรียกอย่างไร |
-|---|---|---|
-| ต่อสายแล้ว | principle ทั้งเจ็ดข้อ, `setup-yolo-stack`, `get-started`, `capture-playbook`, `figure-it-out`, `show-me-your-work`, `unslop`, `reflect` | `yolo-mode` เรียกเองเมื่อสถานการณ์ตรง |
-| แปะไว้ | `recall`, `why`, `interrogate`, `swarm`, `arena`, `automate-me` | คุณพิมพ์ชื่อเรียก |
+| คุณพูดหรือทำอะไร | AI ใช้ |
+|---|---|
+| ถามว่าเริ่มยังไง | `get-started` |
+| อยากสอนงานประจำ | `capture-playbook` |
+| ให้เรียนรู้วิธีทำงานจากแชตเก่า | `automate-me` |
+| ถามว่าทำถึงไหนแล้ว | `recall` |
+| ถามว่าทำไมถึงเป็นแบบนี้ หรือใครตัดสินใจ | `why` |
+| สั่งงานใหญ่ที่ยังไม่มี playbook | `figure-it-out` |
+| งานแบ่งเป็นชิ้นอิสระได้หลายชิ้น | `swarm` |
+| งานที่ลองครั้งเดียวอาจได้โครงผิด | `arena` |
+| ข้อสรุปหรือแผนที่ยังเถียงกันได้ | `interrogate` |
+| แก้งานของ AI เรื่องเดิมสองครั้ง | `reflect` (เสนอตอนจบงาน) |
+| ขอเปลี่ยนโมเดล หรือปิด hook | `setup-yolo-stack` |
 
-การเลื่อนชั้นคือการย้ายหนึ่งบรรทัดใน `skills/yolo-mode/SKILL.md` จากรายการ "Shipped, not wired" ขึ้นไปรายการ "Wired"
+`recall`, `why`, `swarm`, `arena`, `interrogate`, `automate-me` และ `reflect` ใช้ AI หลายตัวพร้อมกัน จึงใช้โทเคนมากกว่างานปกติหลายเท่า AI จะบอกหนึ่งบรรทัดก่อนเริ่ม ถ้าคุณไม่ได้สั่งเอง
 
 ## Principle เกิดอย่างไร
 
@@ -136,6 +146,7 @@ Principle ของคุณเองเข้ามาทาง `reflect` แ�
 ## ข้อจำกัดที่รู้อยู่
 
 - `reflect` ใช้ AI สี่ตัวต่อรอบ จึงใช้โทเคนมาก
+- การต่อสายของ `why`, `swarm`, `arena`, `interrogate` และ `automate-me` ยังไม่เคยทดสอบว่า AI เรียกถูกจังหวะ
 - `why`, `interrogate` และ `recall` เขียนใหม่ให้ใช้กับงานเอกสารและข้อความแล้ว แต่ยังไม่เคยรันกับงานจริง
 - `get-started` ทดสอบแค่ว่า AI เข้า skill และถามคำถามแรก ยังไม่มีคนจริงตอบจนครบสี่ข้อ
 - Principle เจ็ดข้อที่ติดมายังไม่เคยยืนยันกับงานของอาชีพใด

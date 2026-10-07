@@ -1,6 +1,6 @@
 ---
 name: interrogate
-description: "Use for \"interrogate\", \"adversarial review\", \"multi-model review\", \"challenge this\", \"stress test this\", \"find blind spots\", \"poke holes in this\", or \"tear this apart\". Reviewers on different models independently challenge a piece of work: a report, a contract review, a spreadsheet, a plan."
+description: "Use for \"interrogate\", \"adversarial review\", \"multi-model review\", \"challenge this\", \"stress test this\", \"find blind spots\", \"poke holes in this\", \"tear this apart\", \"หาจุดอ่อน\", or \"ช่วยแย้งงานนี้\". Reviewers on different models independently challenge a piece of work: a report, a contract review, a spreadsheet, a plan."
 ---
 
 # Interrogate

@@ -36,11 +36,13 @@ Each fan-out skill lists Claude defaults in its Models section. These slugs do n
 |-------|----------|
 | `reflect` | The three reviewers and the synthesizer map to `spawn_agent`. The transcript finder reads Claude Code's layout under `~/.claude/projects/`, so pass the session digest that step 1 allows instead. |
 | `recall`, `automate-me` | Transcript paths in the skill are Claude Code's. Point the mining at your runtime's transcript directory. |
-| `why` | List MCP servers from the tools Codex exposes to the session. |
+| `why` | A category is available through an MCP server Codex exposes to the session, a skill, or an export on disk. |
+| `get-started`, `capture-playbook`, `setup-yolo-stack`, `automate-me` | Each interview question is plain text, one at a time. `~/.yolo-stack/` is the same path on Codex. |
+| `setup-yolo-stack` | The sheet is `~/.codex/stack-models.md`. Paste its model rows into `AGENTS.md`. |
 | `interrogate`, `arena`, `swarm` | Each reviewer, candidate, or worker is one `spawn_agent` call. Give each writer its own output directory. |
 
 ## Session hook and instructions file
 
-The plugin's `SessionStart` hook runs on Codex after the user trusts it through `/hooks`. A skills-only install has no hook, so add a standing line to `AGENTS.md` that routes work through the **yolo-mode** skill.
+The plugin's `SessionStart` hook runs on Codex after the user trusts it through `/hooks`. A skills-only install has no hook, so add a standing line to `AGENTS.md` that routes work through the **yolo-mode** skill and names `~/.yolo-stack/mode.md`. Without the hook, check for that file yourself at the start of a task.
 
 Where a skill says "your instructions file", on Codex that is `AGENTS.md`. On Claude Code it is `CLAUDE.md`.
