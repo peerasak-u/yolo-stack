@@ -2,7 +2,7 @@
 *.swp
 .claude/settings.local.json
 corrections.md
-!plugins/*/examples/*/corrections.md
+!examples/*/corrections.md
 decisions.tsv
 .audit/
 todo.md

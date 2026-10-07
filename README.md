@@ -4,35 +4,40 @@
 
 yolo-stack ถอดกลไกมาจาก [pstack](https://github.com/cursor/plugins/tree/main/pstack) ของ Lauren Tan (poteto) แล้วตัดเนื้อหางานเขียนโค้ดออก มันมากับกลไกครบ และ principle เจ็ดข้อที่ใช้ได้กับงานเกือบทุกชนิด แต่ไม่มีความรู้ของอาชีพใดอยู่ข้างใน คุณเติมด้วยการตอบคำถาม การเล่างาน และการแก้งาน โดยไม่ต้องเขียนไฟล์เอง
 
-สถานะ: รุ่น 0.2.0 โหลดเข้า Claude Code ได้และ hook ทำงาน แต่ยังไม่มีใครใช้มันทำงานจริงจนครบรอบ และยังไม่ได้ทดสอบบน Codex ในงานจริง
+สถานะ: ติดตั้งลง Claude Code ได้และ hook ทำงาน แต่ยังไม่มีใครใช้มันทำงานจริงจนครบรอบ และยังไม่ได้ทดสอบบน Codex ในงานจริง
 
 ## ติดตั้ง
 
-### Claude Code
-
-พิมพ์ใน Claude Code
+เปิด Claude Code หรือ Codex ในโฟลเดอร์งานของคุณ แล้วคัดลอกข้อความด้านล่างไปวาง AI จะถามสองข้อแล้วติดตั้งให้เอง
 
 ```text
-/plugin marketplace add peerasak-u/yolo-stack
-/plugin install yolo-stack@yolo-stack
+ติดตั้ง yolo-stack ลงโฟลเดอร์นี้ให้ฉัน
+
+1. ถามฉันก่อนสองข้อ ทีละข้อ: อยากตั้งชื่อ stack ของฉันว่าอะไร และ mode แรกชื่ออะไร
+   (stack คือสมุดของฉัน ส่วน mode คือวิธีทำงานหนึ่งแบบที่อยู่ในสมุดนั้น ถ้าฉันไม่มีชื่อในใจให้ใช้ yolo ทั้งคู่)
+2. clone https://github.com/peerasak-u/yolo-stack ลงโฟลเดอร์ชั่วคราว
+3. อ่าน INSTALL.md ในโฟลเดอร์นั้น แล้วทำตามจนจบ
 ```
 
-### Codex
+ไม่มี marketplace และไม่มี plugin การติดตั้งคือการคัดลอกโฟลเดอร์ skill ลงที่ที่ AI ของคุณอ่าน แล้วเพิ่ม hook หนึ่งบรรทัด
 
-พิมพ์ใน terminal
+| | Claude Code | Codex |
+|---|---|---|
+| Skill ไปอยู่ที่ | `.claude/skills/` | `.agents/skills/` |
+| Hook ไปอยู่ที่ | `.claude/settings.json` | `.codex/hooks.json` |
+| สถานะ | ทดสอบแล้วด้วย session จริง | สคริปต์ทำงาน แต่ยังไม่ได้เปิด Codex ทดสอบ |
 
-```shell
-codex plugin marketplace add peerasak-u/yolo-stack
-codex plugin add yolo-stack@yolo-stack
-```
+ถ้าใช้ทั้งสองตัวในโฟลเดอร์เดียวกัน ตัวที่ติดตั้งทีหลังจะลิงก์ไปที่ชุดเดิม จึงมี skill ชุดเดียว
 
-Codex จะขอให้กดไว้ใจ hook ผ่าน `/hooks` ก่อนที่ hook จะทำงาน
+ค่าเริ่มต้นคือติดตั้งเฉพาะโฟลเดอร์งานนั้น อีกโฟลเดอร์หนึ่งจึงมี stack อีกตัวได้ ถ้าอยากใช้ทุกโฟลเดอร์ ให้บอก AI ตอนติดตั้งว่า "ใช้ทุกโฟลเดอร์" แต่แบบนั้นมีได้ stack เดียวต่อเครื่อง
 
-ค่าเริ่มต้นใช้ได้เลยโดยไม่ต้องตั้งอะไร ถ้าอยากเปลี่ยนโมเดลที่แต่ละบทบาทใช้ หรือปิด hook ตอนเริ่ม session ให้สั่ง `setup-yolo-stack`
+อยากทำเอง ดู [`INSTALL.md`](INSTALL.md) หรือรัน `node skills/yolo-mode/scripts/install.mjs --runtime claude --stack <ชื่อ> --mode <ชื่อ>` จากโฟลเดอร์งาน
+
+ถ้าอยากเปลี่ยนโมเดลที่แต่ละบทบาทใช้ หรือปิด hook ตอนเริ่ม session ให้สั่ง `setup-yolo-stack` (ชื่อจะเป็น `setup-<ชื่อ stack>-stack` ตามที่คุณตั้ง)
 
 ## เริ่มใช้
 
-1. สั่ง `get-started` แล้วตอบคำถามสี่ข้อ AI จะจดว่าอะไรทำได้เลย อะไรต้องรอคุณ และงานของคุณตรวจกับอะไร
+1. สั่ง `get-started` แล้วตอบคำถามสี่ข้อ AI จะเขียนลง stack ว่าอะไรทำได้เลย อะไรต้องรอคุณ และงานของคุณตรวจกับอะไร
 2. เลือกงานประจำหนึ่งอย่าง แล้วเปิดงานที่ทำเสร็จแล้วหนึ่งชิ้นไว้ตรงหน้า
 3. สั่ง `capture-playbook` แล้วตอบคำถามของ AI ทีละข้อ มันจะเขียนขั้นตอนของงานนั้นเป็น playbook
 4. สั่งงานนั้นกับ AI ตรวจผล และพิมพ์บอกเมื่อมีอะไรต้องแก้
@@ -42,44 +47,43 @@ Codex จะขอให้กดไว้ใจ hook ผ่าน `/hooks` ก�
 
 กลับมาทำงานต่อวันถัดไป ให้สั่ง `recall` หรือพิมพ์ว่า "ทำถึงไหนแล้ว" มันอ่านประวัติแชตของโฟลเดอร์ที่เปิดอยู่แล้วสรุปงานที่ค้างให้ และใช้โทเคนมากเพราะแตก AI หลายตัวไปอ่าน
 
-อยากเห็นปลายทางก่อนเริ่ม ดู[ตัวอย่างฝ่ายบัญชีเจ้าหนี้](plugins/yolo-stack/examples/accounts-payable/README.md) ซึ่งเป็นเรื่องสมมติของคนหนึ่งคนหลังใช้ไปสองสัปดาห์
+อยากเห็นปลายทางก่อนเริ่ม ดู[ตัวอย่างฝ่ายบัญชีเจ้าหนี้](examples/accounts-payable/README.md) ซึ่งเป็นเรื่องสมมติของคนหนึ่งคนหลังใช้ไปสองสัปดาห์
 
 ## ความรู้ของคุณอยู่ที่ไหน
 
-ทุกอย่างที่คุณสอนอยู่ในโฟลเดอร์ `~/.yolo-stack/` บนเครื่องของคุณ ไม่ได้อยู่ในตัว plugin การอัปเดต plugin จึงไม่ลบมัน
+ทุกอย่างที่คุณสอนอยู่ใน skill ของ stack เอง ในโฟลเดอร์งานของคุณ ไม่มีที่เก็บแยก ตารางนี้ใช้ path ของ Claude Code ส่วน Codex ใช้ `.agents/skills/`
 
-```
-~/.yolo-stack/
-├── mode.md         # อะไรทำได้เลย อะไรต้องรอคุณ ตรวจกับอะไร และสารบัญของสองโฟลเดอร์ล่าง
-├── playbooks/      # ขั้นตอนของงานแต่ละชนิด
-└── principles/     # กฎที่เกิดจากคำแก้ของคุณ
-```
+| สิ่งที่สอน | อยู่ที่ไหน |
+|---|---|
+| อะไรทำได้เลย อะไรต้องรอคุณ และรูปแบบคำตอบ | `.claude/skills/<mode>-mode/SKILL.md` |
+| งานของคุณตรวจกับอะไร | `.claude/skills/principle-prove-it/SKILL.md` |
+| ขั้นตอนของงานแต่ละชนิด | `.claude/skills/<mode>-mode/playbooks/` |
+| กฎที่เกิดจากคำแก้ของคุณ | `.claude/skills/principle-<ชื่อ>/` |
 
-สำรองโฟลเดอร์นี้ไว้เหมือนไฟล์งานอื่น ย้ายเครื่องก็คัดลอกไปทั้งโฟลเดอร์
+สำรองหรือย้ายเครื่องด้วยการคัดลอกโฟลเดอร์งานไปทั้งโฟลเดอร์ ถ้าโฟลเดอร์งานเป็น git repository อยู่แล้ว ไฟล์พวกนี้ commit ไปกับงานได้
 
 ## มีอะไรอยู่ข้างใน
 
 ```
-plugins/yolo-stack/
-├── hooks/                      # ฉีดข้อความตอนเริ่ม session ให้เข้า yolo-mode
-├── models.json                 # ค่าเริ่มต้นของโมเดลต่อบทบาท
-├── tools/                      # check-refs.mjs ตรวจการอ้างอิง, rename-stack.mjs เปลี่ยนชื่อ stack
-├── examples/accounts-payable/  # ตัวอย่างสมมติของ stack ที่เติมแล้ว AI ไม่โหลดตอนทำงาน
-└── skills/
-    ├── yolo-mode/              # router: trigger, สารบัญ principle, autonomy, playbook
-    │   ├── playbooks/          # authoring-a-skill, session-pickup, _template
-    │   └── references/         # mode-template, principle-template, codex-tools
-    ├── setup-yolo-stack/       # เลือกโมเดลต่อบทบาท และเปิดปิด hook ตอนเริ่ม session
-    ├── get-started/            # สัมภาษณ์สี่ข้อ แล้วสร้าง ~/.yolo-stack/ ให้
-    ├── capture-playbook/       # สัมภาษณ์คนจากงานจริง แล้วเขียนเป็น playbook
-    ├── figure-it-out/          # ออกแบบขั้นตอนเองเมื่องานใหญ่และยังไม่มี playbook
-    ├── principle-*/            # เจ็ดข้อ ดูหัวข้อ Principle เกิดอย่างไร
-    ├── show-me-your-work/
-    ├── reflect/
-    ├── unslop/
-    ├── why/  recall/           # หาเหตุผลจากบันทึก และรวบรวมงานที่ค้าง
-    ├── automate-me/            # อ่านแชตเก่า แล้วเสนอสิ่งที่ควรเพิ่มใน ~/.yolo-stack/
-    └── interrogate/  swarm/  arena/
+skills/
+├── yolo-mode/                  # router: trigger, สารบัญ principle, autonomy, playbook
+│   ├── playbooks/              # authoring-a-skill, session-pickup, _template
+│   ├── references/             # principle-template, codex-tools
+│   ├── scripts/                # install, update, check-refs, rename-stack, session-start (hook)
+│   └── models.json             # ค่าเริ่มต้นของโมเดลต่อบทบาท
+├── setup-yolo-stack/           # เลือกโมเดลต่อบทบาท และเปิดปิด hook ตอนเริ่ม session
+├── yolo-update/                # รับของใหม่จาก repo นี้ แล้วรวมกับสิ่งที่คุณสอนไว้
+├── get-started/                # สัมภาษณ์สี่ข้อ แล้วเขียนคำตอบลง skill ของ stack
+├── capture-playbook/           # สัมภาษณ์คนจากงานจริง แล้วเขียนเป็น playbook
+├── figure-it-out/              # ออกแบบขั้นตอนเองเมื่องานใหญ่และยังไม่มี playbook
+├── principle-*/                # เจ็ดข้อ ดูหัวข้อ Principle เกิดอย่างไร
+├── show-me-your-work/
+├── reflect/
+├── unslop/
+├── why/  recall/               # หาเหตุผลจากบันทึก และรวบรวมงานที่ค้าง
+├── automate-me/                # อ่านแชตเก่า แล้วเสนอสิ่งที่ควรเพิ่มใน stack
+└── interrogate/  swarm/  arena/
+examples/accounts-payable/      # ตัวอย่างสมมติของ stack ที่เติมแล้ว ไม่ถูกติดตั้ง
 ```
 
 สามคำที่ต้องรู้
@@ -105,6 +109,7 @@ plugins/yolo-stack/
 | ข้อสรุปหรือแผนที่ยังเถียงกันได้ | `interrogate` |
 | แก้งานของ AI เรื่องเดิมสองครั้ง | `reflect` (เสนอตอนจบงาน) |
 | ขอเปลี่ยนโมเดล หรือปิด hook | `setup-yolo-stack` |
+| ถามว่ามีของใหม่ไหม หรือขออัปเดต | `yolo-update` |
 
 `recall`, `why`, `swarm`, `arena`, `interrogate`, `automate-me` และ `reflect` ใช้ AI หลายตัวพร้อมกัน จึงใช้โทเคนมากกว่างานปกติหลายเท่า AI จะบอกหนึ่งบรรทัดก่อนเริ่ม ถ้าคุณไม่ได้สั่งเอง
 
@@ -122,9 +127,9 @@ Stack นี้มากับ principle เจ็ดข้อที่ไม่
 | `principle-explain-the-number` | กำลังจะเชื่อหรือรายงานตัวเลข |
 | `principle-never-block-on-the-human` | อยากถามว่าควรทำไหม ในงานที่ย้อนกลับได้ |
 
-เจ็ดข้อนี้ยังไม่เคยยืนยันกับงานของคุณ ถ้าคำแก้ของคุณขัดกับข้อไหน `reflect` จะเสนอ principle ของคุณมาแทนข้อนั้น
+เจ็ดข้อนี้ยังไม่เคยยืนยันกับงานของคุณ ถ้าคำแก้ของคุณขัดกับข้อไหน `reflect` จะเสนอเขียนข้อนั้นใหม่หรือลบทิ้ง
 
-Principle ของคุณเองเข้ามาทาง `reflect` และเก็บไว้ใน `~/.yolo-stack/principles/`
+Principle ของคุณเองเข้ามาทาง `reflect` และกลายเป็น skill ใน stack เหมือนเจ็ดข้อนี้
 
 1. คุณแก้งานของ AI ในแชต หรือจดคำแก้ที่เกิดนอกแชตลง `corrections.md` ที่ root ของโปรเจกต์
 2. สั่ง `reflect` มันอ่านบทสนทนากับ `corrections.md` แล้วเสนอรายการแก้
@@ -133,15 +138,23 @@ Principle ของคุณเองเข้ามาทาง `reflect` แ�
 
 คำแก้ทุกข้อไปได้สามทาง ใช้กับงานเดียวไปแก้ playbook ใช้ข้ามงานและเจอสองครั้งเป็น principle ทำเป็น script ได้ก็เป็น script
 
-## ทำเป็น stack ของตัวเอง
+## อัปเดต
 
-1. Fork repo นี้
-2. รัน `node plugins/yolo-stack/tools/rename-stack.mjs yolo <ชื่อใหม่>` มันเปลี่ยน `yolo-mode` และ `yolo-stack` ทั้งชื่อโฟลเดอร์ เนื้อไฟล์ และรายการใน marketplace
-3. ใส่ความรู้ของอาชีพที่อยากให้ทุกคนที่ติดตั้งได้ไปด้วย
-   - รายการ "Just do it" และ "Always pause" ในหัวข้อ Autonomy ของ mode
-   - playbook ของอาชีพ วางใน `skills/<ชื่อใหม่>-mode/playbooks/` และเพิ่มหนึ่งบรรทัดในหัวข้อ Playbooks ของ mode
-   - principle ของอาชีพ วางเป็น `skills/principle-<ชื่อ>/` และเพิ่มหนึ่งบรรทัดในสารบัญ Principles ของ mode
-4. รัน `node plugins/<ชื่อใหม่>-stack/tools/check-refs.mjs` ต้องได้ `ok`
+สั่ง `yolo-update` หรือพิมพ์ว่า "อัปเดต stack" AI จะดึงของใหม่จาก repo นี้มาเทียบกับของคุณ
+
+- ไฟล์ที่คุณไม่ได้แตะ ได้ของใหม่ไปเลย
+- ไฟล์ที่คุณแก้และต้นทางก็แก้ ถูกรวมให้ถ้าแก้คนละจุด
+- ถ้าแก้จุดเดียวกัน AI ตัดสินตามกฎ คือสิ่งที่คุณสอนชนะ ส่วนกลไกของ skill ที่ติดมาใช้ของใหม่ แล้วรายงานทุกจุดให้คุณดู
+- playbook และ principle ที่เกิดจากคำแก้ของคุณไม่ถูกแตะ
+- ก่อนเขียนอะไร มันสำรอง stack เดิมไว้ในโฟลเดอร์ `stack-backup-<วันเวลา>` ข้างโฟลเดอร์ skills
+
+## ทำ stack อีกตัว
+
+เปิด AI ในอีกโฟลเดอร์งานหนึ่ง วาง prompt ติดตั้งอีกครั้ง แล้วตอบชื่อใหม่ stack สองตัวอยู่คนละโฟลเดอร์และไม่แตะกัน
+
+เปลี่ยนชื่อ stack ที่ติดตั้งแล้วได้ด้วย `node .claude/skills/<mode>-mode/scripts/rename-stack.mjs <ชื่อ stack> [ชื่อ mode]` แล้วแก้ path ของ hook ใน `.claude/settings.json` ให้ตรงกับชื่อ mode ใหม่
+
+ตอนนี้หนึ่ง stack มีได้หนึ่ง mode
 
 ## ข้อจำกัดที่รู้อยู่
 
@@ -150,10 +163,12 @@ Principle ของคุณเองเข้ามาทาง `reflect` แ�
 - `why`, `interrogate` และ `recall` เขียนใหม่ให้ใช้กับงานเอกสารและข้อความแล้ว แต่ยังไม่เคยรันกับงานจริง
 - `get-started` ทดสอบแค่ว่า AI เข้า skill และถามคำถามแรก ยังไม่มีคนจริงตอบจนครบสี่ข้อ
 - Principle เจ็ดข้อที่ติดมายังไม่เคยยืนยันกับงานของอาชีพใด
-- ตัวตรวจ `check-refs.mjs` ต้องมี Node บนเครื่อง
-- `unslop` เขียนไว้สำหรับภาษาอังกฤษ กฎฝั่งภาษาไทยยังไม่มี
-- ยังไม่มี skill สำหรับเก็บวิธีพิสูจน์ของแต่ละงาน
+- การติดตั้งและตัวตรวจต้องมี `git` และ `node` บนเครื่อง AI รันให้ แต่ติดตั้งสองตัวนี้ให้ไม่ได้
+- ยังไม่ได้วาง prompt ติดตั้งให้ AI ทำตาม `INSTALL.md` ตั้งแต่ต้นจนจบ ที่ทดสอบแล้วคือสคริปต์ติดตั้งและ session ที่เปิดหลังติดตั้ง
+- ฝั่ง Codex ยังไม่ได้เปิด Codex ทดสอบว่าอ่าน `.agents/skills/` และรัน hook จาก `.codex/hooks.json`
+- ชื่อ skill ไม่มีชื่อ stack นำหน้า ถ้าโฟลเดอร์งานมี skill ชื่อเดียวกันอยู่แล้ว สคริปต์ติดตั้งจะหยุดและไม่เขียนอะไร
+- `yolo-update` ทดสอบสคริปต์รวมไฟล์แล้ว แต่ยังไม่เคยให้ AI แก้จุดชนกันจริงตามกฎใน skill
 
 ## ที่มาและสัญญาอนุญาต
 
-MIT ดู [`LICENSE`](LICENSE) ไฟล์ที่ดัดแปลงจาก pstack และฉบับ port ของ Michael Denyer ระบุไว้ใน [`plugins/yolo-stack/NOTICE.md`](plugins/yolo-stack/NOTICE.md)
+MIT ดู [`LICENSE`](LICENSE) ไฟล์ที่ดัดแปลงจาก pstack และฉบับ port ของ Michael Denyer ระบุไว้ใน [`skills/yolo-mode/NOTICE.md`](skills/yolo-mode/NOTICE.md)
