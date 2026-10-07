@@ -1,0 +1,76 @@
+{
+  "tiers": {
+    "default": "opus",
+    "strongest": "fable",
+    "panel": [
+      "opus",
+      "fable",
+      "sonnet"
+    ]
+  },
+  "efforts": [
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
+  ],
+  "defaultEffort": "session",
+  "available": [
+    "opus",
+    "fable",
+    "sonnet",
+    "haiku"
+  ],
+  "roles": [
+    {
+      "role": "why investigators",
+      "models": "default",
+      "skill": "why"
+    },
+    {
+      "role": "why synthesizer",
+      "models": "default",
+      "skill": "why"
+    },
+    {
+      "role": "reflect tooling",
+      "models": "default",
+      "skill": "reflect"
+    },
+    {
+      "role": "reflect judgment, divergent, synthesizer",
+      "models": "default",
+      "skill": "reflect"
+    },
+    {
+      "role": "arena runners",
+      "models": "panel",
+      "skill": "arena"
+    },
+    {
+      "role": "arena cross-judge pool",
+      "models": "panel",
+      "skill": "arena"
+    },
+    {
+      "role": "swarm workers",
+      "models": "default",
+      "skill": "swarm"
+    },
+    {
+      "role": "interrogate reviewers",
+      "models": "panel",
+      "skill": "interrogate"
+    }
+  ],
+  "codex": {
+    "default": "gpt-6-sol",
+    "strongest": "gpt-6-astra",
+    "panel": [
+      "gpt-6-astra",
+      "gpt-6-sol",
+      "gpt-6-luna"
+    ]
+  }
+}

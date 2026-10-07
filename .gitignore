@@ -1,0 +1,7 @@
+.DS_Store
+*.swp
+.claude/settings.local.json
+corrections.md
+decisions.tsv
+.audit/
+todo.md

@@ -1,0 +1,12 @@
+{
+  "name": "yolo-stack",
+  "version": "0.1.0",
+  "description": "A blank agent stack for any profession: a router skill, playbooks captured from real work, principles that grow from corrections, and a decision trail. Derived from pstack by Lauren Tan (poteto).",
+  "author": {
+    "name": "Peerasak Unsakon",
+    "url": "https://github.com/peerasak-u"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/peerasak-u/yolo-stack",
+  "homepage": "https://github.com/peerasak-u/yolo-stack"
+}
