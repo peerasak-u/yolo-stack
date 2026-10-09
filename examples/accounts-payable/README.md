@@ -8,8 +8,8 @@
 
 | วัน | คนทำอะไร | ไฟล์ที่ได้ |
 |---|---|---|
-| วันแรก | สั่ง `get-started` แล้วตอบคำถามสี่ข้อ | [`mode-changes.md`](mode-changes.md) ส่วน Autonomy และของจริง |
-| วันแรก | เปิดใบแจ้งหนี้ที่ตรวจเสร็จแล้วหนึ่งใบ สั่ง `capture-playbook` แล้วเล่าทีละขั้น | [`playbooks/invoice-check.md`](playbooks/invoice-check.md) |
+| วันแรก | สั่ง `get-started` บอกว่าอยากสอนวิธีตรวจใบแจ้งหนี้ที่ทำอยู่แล้ว | ไปทาง `capture-playbook` |
+| วันแรก | เปิดใบแจ้งหนี้ที่ตรวจเสร็จแล้วหนึ่งใบ แล้วเล่าทีละขั้น รวมถึงจุดที่คนต้องตัดสินใจและเอกสารที่ใช้ตรวจ | [`playbooks/invoice-check.md`](playbooks/invoice-check.md) และ [`mode-changes.md`](mode-changes.md) ส่วน Autonomy และของจริง |
 | สัปดาห์แรก | ให้ AI ตรวจใบแจ้งหนี้จริง แล้วแก้งานของมันสองครั้งในเรื่องเดียวกัน | [`corrections.md`](corrections.md) |
 | สิ้นสัปดาห์ที่สอง | สั่ง `reflect` แล้วอนุมัติข้อเสนอหนึ่งข้อ | [`principle-report-every-difference/SKILL.md`](principle-report-every-difference/SKILL.md) |
 

@@ -7,7 +7,7 @@ description: "Use for 'automate me', 'learn how I work from my past chats', 'tur
 
 On Codex, read the [platform mapping](../yolo-mode/references/codex-tools.md), including its per-skill notes, before following this skill.
 
-Turn how the human has been working with agents into entries in this stack's own skills. The **get-started** skill asks them. This skill reads what they already did.
+Turn how the human has been working with agents into entries in this stack's own skills. The **get-started** skill helps them choose a first job. This skill reads work they already did.
 
 ## Flow
 

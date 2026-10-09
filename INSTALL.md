@@ -54,4 +54,4 @@ Tell the human, in their language:
 - to start a new session in this folder, then say "get started" or the same in their language
 - what did not work, if anything
 
-Do not run the `get-started` interview in this session. The skills load in the next one.
+Do not run `get-started` in this session. The skills load in the next one.

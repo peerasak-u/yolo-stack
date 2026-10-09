@@ -19,7 +19,9 @@ Everything the human teaches is written into this stack's own files. Their Auton
 
 The stack's skill folders sit side by side in the skills folder the runtime reads, and that is where you edit them. The scripts, `models.json`, and the notices are in this skill's folder.
 
-The session hook says when the stack has not been set up for the human's work. The **get-started** skill does that by interview. Offer it once. Do not run it unasked.
+<!-- get-started: pending -->
+
+The session hook offers the **get-started** skill when no first job has been chosen. It helps the human choose between doing a job now and teaching a method they already use. Offer it once. Do not run it unasked or interrupt a concrete task with onboarding. When the first concrete job is ready to begin, including a direct request that skips onboarding, change `<!-- get-started: pending -->` to `<!-- get-started: started -->` here and run `node scripts/check-refs.mjs` from this skill's folder.
 
 ## Triggers
 
@@ -28,7 +30,7 @@ The Principles section below grounds every trigger. Remaining triggers:
 - The human asks how to start, or asks to be set up → the **get-started** skill.
 - The human asks to change which models the stack uses, or to turn the session hook on or off → the **setup-yolo-stack** skill.
 - The human asks for the latest version of the stack, or whether there is anything new → the **yolo-update** skill.
-- A person wants to teach how they do a recurring job, or a job that will recur has no playbook → the **capture-playbook** skill.
+- A person wants to teach a method they already use, walking through a finished case → the **capture-playbook** skill. A request to do work proceeds with an existing playbook or the work routes below, even if the job will recur.
 - The human asks the agent to learn how they work from their past sessions → the **automate-me** skill.
 - The human asks where they left off, or resumes work on a named client, matter, or project from earlier sessions → the **recall** skill. One specific prior chat to continue is the **Session pickup** playbook instead.
 - A question about why something is the way it is, or who decided it and when → the **why** skill. The answer is read-only and cited.
@@ -60,11 +62,11 @@ New principles enter this index through **reflect**, shaped by [`references/prin
 
 ## Autonomy
 
-Replace the examples in this section with the domain's own lists before first use.
+Start with these examples. Learn job-specific boundaries from actual work and confirmed decisions, and keep their job context. These lists do not need an onboarding interview before work begins.
 
 **Just do it.** Work that can be undone proceeds without asking: drafts, local files, analysis, scripts run against copies.
 
-**Always pause.** Work that cannot be undone needs the human every time: anything sent to another person, anything filed or submitted, anything deleted, anything signed.
+**Always pause.** Decisions reserved for the human wait for them. Until they specify otherwise for a job, pause before sending to another person, filing or submitting, deleting, or signing. Prepare the work and ask about the concrete decision at that step.
 
 **No is an acceptable answer.** Asked whether to do something, or shown an approach, reply with your real judgment. Push back when the premise is wrong.
 

@@ -37,7 +37,7 @@ Each fan-out skill lists Claude defaults in its Models section. These slugs do n
 | `reflect` | The three reviewers and the synthesizer map to `spawn_agent`. The transcript finder reads Claude Code's layout under `~/.claude/projects/`, so pass the session digest that step 1 allows instead. |
 | `recall`, `automate-me` | Transcript paths in the skill are Claude Code's. Point the mining at your runtime's transcript directory. |
 | `why` | A category is available through an MCP server Codex exposes to the session, a skill, or an export on disk. |
-| `get-started`, `capture-playbook`, `setup-yolo-stack`, `automate-me` | Each interview question is plain text, one at a time. |
+| `get-started`, `capture-playbook`, `setup-yolo-stack`, `automate-me` | Ask each question in plain text, one at a time. `get-started` offers doing work now or teaching an existing method. |
 | `setup-yolo-stack` | The sheet is `~/.codex/stack-models.md`. Paste its model rows into `AGENTS.md`. |
 | `interrogate`, `arena`, `swarm` | Each reviewer, candidate, or worker is one `spawn_agent` call. Give each writer its own output directory. |
 

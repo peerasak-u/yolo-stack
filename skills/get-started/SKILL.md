@@ -1,34 +1,33 @@
 ---
 name: get-started
-description: "Set this stack up for one person's work by interview: what the agent may do without asking, what always waits for them, what counts as proof in their work, and their first recurring job. Use for /get-started, 'set me up', 'how do I start', 'เริ่มใช้', 'เริ่มยังไง', or when the session hook reports the stack is not set up."
+description: "Help a person start with one real job: help them do it now, or capture a method they already use. Use for /get-started, 'set me up', 'how do I start', 'เริ่มใช้', or 'เริ่มยังไง'. A task already asking for execution or teaching goes directly to the matching skill."
 ---
 
 # Get started
 
-Fill this stack with one person's rules by asking, so they never open a file. What they tell you is written into the stack's own skills.
+Start with the work they want help with. Choose between doing that work now and learning a method they already use.
 
-They may not work with software. Speak their language, and write their rules in it. Say "the steps for a job" before you say playbook, and "a rule you want me to keep" before you say principle. Ask one question, wait for the answer, then ask the next. They should not type more than a sentence at a time.
+Speak their language. Describe the two paths in everyday words, without skill names. Ask one question at a time. Use what they already told you instead of asking again.
 
-Ask about things that happened, not about policy. "What would you never let an assistant do?" gets a textbook answer. "What was the last thing you sent that you could not take back?" gets theirs. Do not offer a list to pick from. A suggested answer gets agreement, and agreement is not how they work.
+Do not open with an interview about permissions, actions that cannot be undone, or what counts as proof. Understand the job first. Keep any boundaries they volunteered and pass them to the next skill.
 
-## Before you start
+## Find the first job
 
-Read the Autonomy section of the **yolo-mode** skill. If its lists are already theirs, read them back, ask what has changed, and edit only that.
+Read the **yolo-mode** skill for existing boundaries, preferences, and playbooks. Keep what they have already taught.
 
-## The interview
+If they have not named a job, ask "What would you like help with first?" In Thai: "อยากให้ช่วยงานอะไรเป็นอย่างแรก?" Ask only for the missing context needed to identify that job.
 
-1. **The work.** "What is your job, and what do you do every week that you would hand to an assistant?" Keep the list of jobs.
-2. **What always waits for them.** "Think of the last time something left your hands and could not be taken back. What was it?" Ask again until they run out. Then read them the Always pause examples in the **yolo-mode** skill and ask which hold in their work.
-3. **What needs no permission.** "A new assistant starts tomorrow. What do you let them do on day one without checking with you?"
-4. **What counts as proof.** "When an assistant gives you a number or a fact, what do you open to check it?" Each answer names a real thing: a system, a record, a signed document.
+## Choose the path
 
-## Write it
+If their intent is clear, take that path. Otherwise ask whether they want help doing this job now or want to teach a method they already use. In Thai: "งานนี้อยากให้ช่วยลงมือทำเลย หรือมีวิธีทำอยู่แล้วและอยากสอนให้ทำตาม?"
 
-1. In the Autonomy section of the **yolo-mode** skill, replace the example lists with their answers to questions 2 and 3, and delete the line that says to replace them.
-2. In step 1 of the Pattern in the **principle-prove-it** skill, replace the last sentence with their answers to question 4.
-3. Under Writing the reply in the **yolo-mode** skill, set the language they answered in, and add any preference they stated without being asked.
-4. Read all of it back in plain words and fix it until they say it is right.
-5. Run `node scripts/check-refs.mjs` from the **yolo-mode** skill's folder. It must print `ok`.
-6. Pick the first job. From the list in question 1, take the one they do most often and have a finished case of at hand. Hand that job to the **capture-playbook** skill. With no finished case at hand, stop here and tell them what to bring next time.
+- **Do the work now.** Use an existing playbook if one fits. Otherwise hand a multi-step or unfamiliar job to the **figure-it-out** skill. A small, clear task proceeds directly under the mode's rules. Ask for the material needed for this job, not a finished example from an earlier job.
+- **Teach an existing method.** Hand the job to the **capture-playbook** skill with one real finished case. If they have no case at hand, say what to bring. They can choose to do current work now instead; do not switch paths for them.
 
-**Reply:** the lists as written, the job chosen for the first playbook, and what they should bring if the capture did not start.
+## Hand over
+
+Pass the job, its available material, and any stated boundaries to the selected skill. Once a concrete job is ready to start, replace `<!-- get-started: pending -->` with `<!-- get-started: started -->` in the **yolo-mode** skill. If you changed that file, run `node scripts/check-refs.mjs` from its folder. Do not treat this marker as permission to perform the job's actions.
+
+The selected skill learns what the agent may do and which decisions belong to the human while working through actual steps. Ask at a relevant step, in the words of that job, such as "I can prepare this payment list. Who decides which payments to approve?" Record confirmed boundaries in the mode's Autonomy section, with their job context. Identify the records used to check this job through the **principle-prove-it** skill. Neither is a prerequisite interview.
+
+**Reply:** the first job and the next action, or the specific material needed to begin.

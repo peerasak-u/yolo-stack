@@ -19,6 +19,8 @@ Do not start until you can state all three.
 
 Show the human this framing before a long run. Work that can be undone then proceeds without further questions, per the **principle-never-block-on-the-human** skill.
 
+Learn who decides what from the actual job. Use any boundaries already stated in the **yolo-mode** skill or this task. Prepare the work, then ask about a concrete decision when it is needed, such as who approves a payment before it is submitted. Record newly confirmed boundaries in the mode's Autonomy section with their job context. Do not make a general permissions interview a condition for starting.
+
 ## Phase B: Design the steps
 
 - Split the job into units that can each be finished and checked alone.

@@ -9,7 +9,7 @@ On Codex, read the [platform mapping](../yolo-mode/references/codex-tools.md) be
 
 Write the per-role model override sheet for this machine. Each skill that fans out names a default model in its Models section. The sheet replaces those defaults with models the human has.
 
-This skill sets up the machine. What the human's work is, and how they want it done, is the **get-started** skill.
+This skill sets up the machine. The **get-started** skill helps the human choose a first job to do now or a method to teach.
 
 The human may not know what a model is. Say that a model is which AI does a given part of the job, that the defaults work, and that they can accept everything by saying so. Ask one question at a time.
 
@@ -68,7 +68,7 @@ On Codex, paste the model rows into `<codex-home>/AGENTS.md`, because Codex has 
 
 ### 8. Confirm
 
-Tell the human where the sheet was written, how its rows load, and whether the hook is on. If the session hook reported that the stack has not been set up for the human's work, say in one sentence that the **get-started** skill is the next step.
+Tell the human where the sheet was written, how its rows load, and whether the hook is on. If the session hook reported that no first job has been chosen, offer the **get-started** skill in one sentence. A concrete task can start directly.
 
 ## Models
 

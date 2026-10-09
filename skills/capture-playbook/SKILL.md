@@ -1,6 +1,6 @@
 ---
 name: capture-playbook
-description: "Interview a person about one recurring job, walking a real finished case step by step, and write the result as a playbook. Use for /capture-playbook, 'capture a playbook', 'let me teach you how I do X', 'write down how I do X', or when a job that will recur has no playbook yet."
+description: "Interview a person about a method they already use for one recurring job, walking a real finished case step by step, and write it as a playbook. Use for /capture-playbook, 'capture a playbook', 'let me teach you how I do X', or 'write down how I do X'. A request to do work without a playbook goes to execution, not this interview."
 ---
 
 # Capture a playbook
@@ -29,7 +29,7 @@ Start with "You open this case. What do you look at first?" Then for each step t
 2. How did you know that step was finished, or that you had seen enough?
 3. Did anything here make you stop and doubt? What was it?
 4. If someone else did this step and got it wrong, how would you catch it?
-5. If this step went wrong, could it be undone? Is this a step only you may decide?
+5. At this step, what may an assistant prepare or do, and what must wait for your decision? Name the actual action or decision from this case.
 
 Stop the walk when they reach the point where the job leaves their hands.
 

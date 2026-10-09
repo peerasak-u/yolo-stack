@@ -11,7 +11,7 @@ Verify every output by checking the real thing directly. Do not infer from a pro
 **Why:** A summary that sounds right reads the same whether it is true or not. Acting on a wrong inference costs far more than checking the source.
 
 **Pattern:**
-1. Name the real thing for this claim: the source record, the produced file, the live value. Replace this line with the domain's own list before first use.
+1. Name the real thing for this claim: the source record, the produced file, the live value. Use the job's known sources and learn others while doing or capturing the job. Record confirmed sources with their job context here.
 2. Read it in this session. A value copied from an earlier summary, or from a file you generated yourself, is not the source.
 3. Point at it. Every claim carries a pointer a reviewer can follow, such as `file:line` or document and page.
 4. Script the check when you can. A script that reruns the same comparison beats a one-time look, and its output is an artifact a reviewer reruns instead of trusting your word.
